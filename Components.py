@@ -1,13 +1,17 @@
-from collections import namedtuple
+from namedlist import namedlist
 
-PolygonShape = namedtuple('PolygonShape', ["points"])
+PolygonShape = namedlist('PolygonShape', ["points"])
 
-Position = namedtuple('Position', ["x", "y"])
+Position = namedlist('Position', ["x", "y"])
 
-Orientation = namedtuple('Orientation', ["angle"])
+Orientation = namedlist('Orientation', ["angle"])
 
-Color = namedtuple('Color', ["r", "g", "b"])
+Color = namedlist('Color', ["r", "g", "b"])
 
-MoveSpeed = namedtuple('MoveSpeed', ["speed"])
+MoveSpeed = namedlist('MoveSpeed', ["speed"])
 
-TurnSpeed = namedtuple('TurnSpeed', ["speed"])
+TurnSpeed = namedlist('TurnSpeed', ["speed"])
+
+Health = namedlist('Health', ["amount"])
+
+FoodSeen = namedlist('FoodSeen', ["number"])

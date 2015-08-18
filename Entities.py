@@ -3,15 +3,26 @@ from Components import PolygonShape
 from Components import Orientation
 from Components import MoveSpeed
 from Components import TurnSpeed
+from Components import Health
+from Components import FoodSeen
+from NeuralNetwork import NeuralNetwork
 
 class Creature(Entity):
-    def __init__(self, world, shape, position, orientation, color):
-        self.polygonshape = PolygonShape(shape)
+    BASE_SHAPE = [[10, 0], [0, -10], [-5, -5], [-5, 5], [0, 10]]
+    MAX_HEALTH = 100
+
+    def __init__(self, world, position, orientation, color):
+        self.polygonshape = PolygonShape(self.BASE_SHAPE)
         self.position = position
-        self.orientation = Orientation(orientation)
+        self.orientation = orientation
         self.color = color
         self.movespeed = MoveSpeed(0)
         self.turnspeed = TurnSpeed(0)
+
+        self.neuralnetwork = NeuralNetwork(2, 7, 2)
+        self.neuralnetwork.initialize_random_network()
+        self.health = Health(self.MAX_HEALTH)
+        self.foodseen = FoodSeen(0)
 
 class Food(Entity):
     def __init__(self, world, shape, position, color):

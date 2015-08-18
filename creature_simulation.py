@@ -3,7 +3,8 @@ from pygame.locals import *
 from pprint import pprint
 from ebs import World
 from Systems import ShapeRenderer
-from Systems import Mover
+from Systems import NeuralNetworkSystem
+from Systems import MovingSystem
 from Entities import Creature
 from Entities import Food
 from Components import PolygonShape
@@ -13,41 +14,14 @@ from Components import Color
 
 
 def main():
+    screen = None
     sim_world = World()
-    sim_world.add_system(ShapeRenderer(None))
-    sim_world.add_system(Mover(None))
+    sim_world.add_system(NeuralNetworkSystem())
+    sim_world.add_system(MovingSystem())
+    sim_world.add_system(ShapeRenderer(screen))
 
-    Creature(sim_world,
-             [[0, 1], [2, 3], [3, 4]],
-             Position(5, 6),
-             45.0,
-             Color(255, 255, 255))
-    Creature(sim_world,
-             [[0, 1], [2, 3], [3, 4]],
-             Position(5, 6),
-             45.0,
-             Color(255, 255, 255))
-    Creature(sim_world,
-             [[0, 1], [2, 3], [3, 4]],
-             Position(5, 6),
-             45.0,
-             Color(255, 255, 255))
-    Creature(sim_world,
-             [[0, 1], [2, 3], [3, 4]],
-             Position(5, 6),
-             45.0,
-             Color(255, 255, 255))
 
-    Food(sim_world,
-             [[0, 1], [2, 3], [3, 4]],
-             Position(5, 6),
-             Color(255, 255, 255))
-
-    Food(sim_world,
-             [[0, 1], [2, 3], [3, 4]],
-             Position(5, 6),
-             Color(255, 255, 255))
-
+    Creature(sim_world, Position(4, 5), Orientation(50.0), Color(255, 255, 255))
 
     sim_world.process()
 
