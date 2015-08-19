@@ -8,6 +8,7 @@ from Components import MoveSpeed
 from Components import TurnSpeed
 from Components import Health
 from Components import FoodSeen
+from Components import Collider
 from NeuralNetwork import NeuralNetwork
 
 class ShapeRenderer(Applicator):
@@ -56,3 +57,18 @@ class NeuralNetworkSystem(Applicator):
             movespeed.speed = outputs[1] / 6.0
 
             print("Updated NN, outputs: {}, {} ".format(turnspeed, movespeed))
+
+class CollisionSystem(System):
+    def __init__(self, quadtree):
+        super().__init__()
+        self.componenttypes = (Collider,)
+        self.quadtree = quadtree
+
+    def process(self, world, componentsets):
+        for collider in componentsets:
+            print("Adding {} to quadtree".format(collider))
+            self.quadtree.update(collider)
+
+        for collider in componentsets:
+            # check for collisions
+            pass

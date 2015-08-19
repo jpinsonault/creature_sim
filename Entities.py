@@ -5,7 +5,9 @@ from Components import MoveSpeed
 from Components import TurnSpeed
 from Components import Health
 from Components import FoodSeen
+from Components import Collider
 from NeuralNetwork import NeuralNetwork
+from ShapeUtils import get_bounding_square
 
 class Creature(Entity):
     BASE_SHAPE = [[10, 0], [0, -10], [-5, -5], [-5, 5], [0, 10]]
@@ -23,6 +25,9 @@ class Creature(Entity):
         self.neuralnetwork.initialize_random_network()
         self.health = Health(self.MAX_HEALTH)
         self.foodseen = FoodSeen(0)
+
+        bounding_square = get_bounding_square(self.BASE_SHAPE)
+        self.collider = Collider(self, bounding_square, self.BASE_SHAPE)
 
 class Food(Entity):
     def __init__(self, world, shape, position, color):
